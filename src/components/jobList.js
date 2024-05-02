@@ -13,6 +13,7 @@ const JobList = () => {
 
   useEffect(() => {
     getJobs();
+    // eslint-disable-next-line
   }, []);
 
   const getJobs = async () => {

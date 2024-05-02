@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Card, CardContent, Typography, Button, Box, Fab } from "@mui/material";
+import { useState } from "react";
+import "./jobCard.css";
 
 const JobCard = ({ job }) => {
   const {
@@ -13,7 +15,7 @@ const JobCard = ({ job }) => {
     maxExp,
     jobRole,
   } = job;
-
+  const [isExpanded, setIsExpanded] = useState(false);
   return (
     <Card style={{ borderRadius: "20px", border: "1px solid lightgrey" }}>
       <CardContent>
@@ -56,7 +58,8 @@ const JobCard = ({ job }) => {
               overflow: "hidden",
               textOverflow: "ellipsis",
               maxHeight: "200px",
-            }}>
+            }}
+            className={isExpanded ? "expanded" : ""}>
             {jobDetailsFromCompany}
           </Typography>
           <div
@@ -71,6 +74,7 @@ const JobCard = ({ job }) => {
             }}></div>
         </div>
         <div
+          onClick={() => setIsExpanded(!isExpanded)}
           style={{
             marginTop: "-20px",
             width: "100%",
@@ -78,7 +82,6 @@ const JobCard = ({ job }) => {
             justifyContent: "center",
           }}>
           <Fab
-            href={jdLink}
             style={{
               whiteSpace: "nowrap",
               color: "blue",
@@ -87,7 +90,7 @@ const JobCard = ({ job }) => {
               backgroundColor: "transparent",
               boxShadow: "none",
             }}>
-            View job
+            {isExpanded ? "Read less" : "Read more"}
           </Fab>
         </div>
         <Box>
